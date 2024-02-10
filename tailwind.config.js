@@ -13,7 +13,20 @@ module.exports = {
     './src/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundColor: {
+        primary: '#F8F5F0',
+        white: '#F8F3F0',
+        tertiary: '#3b442e',
+      },
+      textColor: {
+        primary: '#F8F5F0',
+        tertiary: '#3b442e',
+      },
+      backgroundImage: {
+        secondary: 'linear-gradient(88deg, #FDDCDB 1.41%, #FFC7C7 98.7%)',
+      },
+    },
   },
   variants: {},
   plugins: [],

@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.bg-secondary {
+  background-image: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f8f5f0;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #3b442e;
+  width: 2px;
+}
+
+::-webkit-scrollbar {
+  width: 2px;
+}
+
+.scroll-anim {
+  animation: scroll 10s linear infinite;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: initial;
+  width: 100%;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
