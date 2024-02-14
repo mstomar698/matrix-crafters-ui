@@ -7,6 +7,8 @@ const DemoPage = () => {
   const [userPin, setUserPin] = useState('');
   const [sellerOldPin, setSellerOldPin] = useState('');
   const [sellerPin, setSellerPin] = useState('');
+  const [viewModal, setViewModal] = useState(false);
+  const [message, setMessage] = useState('');
 
   const handleFormSwitch = (formType: any) => {
     setActiveForm(formType);
@@ -16,7 +18,7 @@ const DemoPage = () => {
     if (!pins) return [];
     if (!pins.includes(',')) {
       if (pins.length === 6) {
-        return [pins];
+        return [parseInt(pins, 10)];
       } else {
         return [];
       }
@@ -25,15 +27,16 @@ const DemoPage = () => {
     for (let i = 0; i < pinsArray.length; i++) {
       const pin = pinsArray[i].trim();
       if (pin.length === 6) {
-        cleanPins.push(pin);
+        cleanPins.push(parseInt(pin, 10));
       } else {
       }
     }
     console.log(cleanPins, 'cleanPins', pinsArray, 'pinsArray', pins, 'pins');
     return cleanPins || [];
   }
+
   async function sellerHandler() {
-    const api = 'https://644d-152-58-40-36.ngrok-free.app/routes';
+    const api = 'https://matrix-api.mstomar.info/routes';
     try {
       switch (option) {
         case 'create':
@@ -49,6 +52,8 @@ const DemoPage = () => {
           });
           const createData = await createResponse.json();
           console.log(createData);
+          setMessage(createData.message);
+          setViewModal(true);
           break;
         case 'update':
           const updateResponse = await fetch(`${api}/update`, {
@@ -64,6 +69,8 @@ const DemoPage = () => {
           });
           const updateData = await updateResponse.json();
           console.log(updateData);
+          setMessage(updateData.message);
+          setViewModal(true);
           break;
         case 'delete':
           const deleteResponse = await fetch(`${api}/delete`, {
@@ -78,6 +85,8 @@ const DemoPage = () => {
           });
           const deleteData = await deleteResponse.json();
           console.log(deleteData);
+          setMessage(deleteData.message);
+          setViewModal(true);
           break;
         default:
           break;
@@ -88,9 +97,7 @@ const DemoPage = () => {
   }
 
   async function userHandler() {
-    const api = `https://644d-152-58-40-36.ngrok-free.app/routes/search?seller_id=${sellerId}&pin=${await cleanPins(
-      userPin
-    )}`;
+    const api = `https://matrix-api.mstomar.info/routes/search?seller_id=${sellerId}&pin=${userPin}`;
     try {
       const response = await fetch(api, {
         method: 'GET',
@@ -99,6 +106,8 @@ const DemoPage = () => {
         },
       });
       const data = await response.json();
+      setViewModal(true);
+      setMessage(data.message);
       console.log(data);
     } catch (error) {
       console.error('Error:', error);
@@ -107,6 +116,22 @@ const DemoPage = () => {
 
   return (
     <div className="min-h-screen bg-white [background:linear-gradient(180deg,rgb(255,236.39,235.73)_0%,rgb(59,55,46)_100%)] flex flex-col items-center justify-center text-center relative -mt-20">
+      {viewModal && (
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 bg-black bg-opacity-50">
+          <div className="bg-white p-4 rounded-lg max-h-[300px] flex flex-col justify-center items-center text-center">
+            <div className="text-center text-2xl">{message}</div>
+            <button
+              type="submit"
+              onClick={() => {
+                setViewModal(false);
+              }}
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
       <div className="max-w-lg p-6 bg-transparent backdrop-blur-lg lg:min-w-[450px] rounded-lg shadow-lg shadow-black flex justify-center items-center flex-col min-h-[450px] max-lg:min-w-[300px]">
         <div className="flex mb-6 space-x-1 justify-center items-center">
           <button
