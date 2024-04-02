@@ -160,7 +160,7 @@ const DemoPage = () => {
         {activeForm === 'seller' && (
           <>
             <div className="text-2xl font-bold mb-4">Seller Demo</div>
-            <div className="flex flex-col w-min justify-center items-center text-center">
+            <div className="flex flex-col w-min justify-center items-center text-center my-2">
               <label htmlFor="seller-id" className="block mb-1">
                 Seller Id
               </label>
@@ -212,12 +212,16 @@ const DemoPage = () => {
                 Submit
               </button>
             </div>
+            <div>
+              <a href="https://raw.githubusercontent.com/mukul-kr/matrixcrafters/main/pin.txt" target="_blank" rel='noreferrer' className='text-xl font-bold m-2 border-2 border-blue-500 px-2'>Demo Pins</a>
+              <a href="https://raw.githubusercontent.com/mukul-kr/matrixcrafters/main/id.txt" target="_blank" rel='noreferrer' className='text-xl font-bold m-2 border-2 border-blue-500 px-2'>Demo Ids</a>
+            </div>
           </>
         )}
         {activeForm === 'user' && (
           <>
             <div className="text-2xl font-bold mb-4">User Demo</div>
-            <div className="flex flex-col w-min justify-center items-center text-center">
+            <div className="flex flex-col w-min justify-center items-center text-center my-2">
               <label htmlFor="user-seller" className="block mb-1">
                 Select a seller
               </label>
@@ -243,6 +247,10 @@ const DemoPage = () => {
               >
                 Search
               </button>
+            </div>
+            <div>
+            <a href="https://raw.githubusercontent.com/mukul-kr/matrixcrafters/main/pin.txt" target="_blank" rel='noreferrer' className='text-xl font-bold m-2 border-2 border-blue-500 px-2'>Demo Pins</a>
+              <a href="https://raw.githubusercontent.com/mukul-kr/matrixcrafters/main/id.txt" target="_blank" rel='noreferrer' className='text-xl font-bold m-2 border-2 border-blue-500 px-2'>Demo Ids</a>
             </div>
           </>
         )}
